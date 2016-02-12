@@ -1,10 +1,10 @@
 require 'optparse'
-require_relative 'k9boot/rails_app_builder'
+require_relative 'railsify/rails_app_builder'
 
 def main
   options = parse_options
-  K9Boot::RailsAppBuilder.new(get_app_name(options), options.key?(:admin))
-                         .build
+  Railsify::RailsAppBuilder.new(get_app_name(options), options.key?(:admin))
+                           .build
 end
 
 def parse_options
@@ -33,7 +33,7 @@ def get_app_name(options)
   return options[:name] if options.key?(:name)
 
   print 'Enter application name (default is ' \
-        "#{K9Boot::RailsAppBuilder::DEFAULT_APP_NAME}): "
+        "#{Railsify::RailsAppBuilder::DEFAULT_APP_NAME}): "
   name = gets.chomp.strip
   name
 end

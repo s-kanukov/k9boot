@@ -1,6 +1,6 @@
 require_relative 'app_bootstrapper'
 
-module K9Boot
+module Railsify
   class RailsAppBuilder
     DEFAULT_APP_NAME = 'RailsApp'.freeze
 
@@ -27,7 +27,7 @@ module K9Boot
 
     def bootstrap_app
       app_type = @create_admin ? :advanced : :simple
-      bootstrapper = K9Boot::AppBootstrapper.new(@app_name, app_type)
+      bootstrapper = Railsify::AppBootstrapper.new(@app_name, app_type)
       bootstrapper.bootstrap
     end
   end

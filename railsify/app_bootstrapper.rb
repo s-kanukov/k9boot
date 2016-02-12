@@ -2,9 +2,9 @@ require 'fileutils'
 require 'yaml'
 require_relative 'actions'
 
-module K9Boot
+module Railsify
   class AppBootstrapper
-    include K9Boot::Actions
+    include Railsify::Actions
 
     DEFAULT_TEMPLATES_PATH = 'templates'.freeze
 
