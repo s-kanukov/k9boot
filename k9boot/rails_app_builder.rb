@@ -22,7 +22,7 @@ module K9Boot
 
     def create_app
       puts "Creating #{@app_name}..."
-      system("echo rails new #{@app_name} --database=postgresql")
+      system("rails new #{@app_name} --database=postgresql")
     end
 
     def bootstrap_app
