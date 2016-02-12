@@ -34,8 +34,7 @@ module K9Boot
       shared_templates_path = File.join(__dir__, DEFAULT_TEMPLATES_PATH,
                                         DEFAULT_SHARED_TEMPLATES_PATH)
 
-      bootstrap_boot_commands shared_templates_path
-      bootstrap_copy_dirs shared_templates_path
+      bootstrap_templates shared_templates_path
     end
 
     def bootstrap_specific_templates
@@ -48,8 +47,12 @@ module K9Boot
                     DEFAULT_ADVANCED_TEMPLATES_PATH)
         end
 
-      bootstrap_boot_commands specific_templates_path
-      bootstrap_copy_dirs specific_templates_path
+      bootstrap_templates specific_templates_path
+    end
+
+    def bootstrap_templates(templates_path)
+      bootstrap_boot_commands templates_path
+      bootstrap_copy_dirs templates_path
     end
 
     def bootstrap_boot_commands(templates_path)

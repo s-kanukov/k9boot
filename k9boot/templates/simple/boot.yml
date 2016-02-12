@@ -1,0 +1,27 @@
+---
+boot:
+  - tasks:
+    - command: rails generate controller Home index
+
+  - snippets:
+    - file: config/routes.rb
+      replace:
+        - code: get 'home/index'
+          with: root 'home#index'
+
+    - file: app/views/home/index.html.erb
+      insert:
+        - code: |+
+                <% provide(:title, 'Index page') %>
+
+          where: begin
+        - code: |
+        
+                <% content_for :footer_scripts do %>
+                  <script>
+                    !function() {
+                      console.log('Hello from Home#index');
+                    }();
+                  </script>
+                <% end %>
+          where: end

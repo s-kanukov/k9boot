@@ -1,6 +1,16 @@
 ---
 boot:
   - snippets:
+    - file: Gemfile
+      insert:
+        - code: |
+                gem 'bourbon'
+                gem 'puma'
+          where: end
+      replace:
+        - code: gem 'coffee-rails'
+          with: "# gem 'coffee-rails'"
+
     - file: config/application.rb
       insert:
         - code: |2+
@@ -10,13 +20,6 @@ boot:
           where: after
           selector: |
                     class Application < Rails::Application
-
-    - file: Gemfile
-      insert:
-        - code: |
-                gem 'bourbon'
-                gem 'puma'
-          where: end
 
     - file: app/assets/javascripts/application.js
       delete:
@@ -31,6 +34,19 @@ boot:
                 //= require jquery
           with: |
                 //= require jquery2
+
+    - file: app/views/layouts/application.html.erb
+      insert:
+        - code: |
+                <%= yield :footer_scripts %>
+          where: before
+          selector: |
+                    </body>
+      replace:
+        - code: <html>
+          with: <html lang="<%= I18n.locale %>">
+        - code: </title>
+          with: ' | <%= yield :title %></title>'
 
   - tasks:
     - command: rm app/assets/stylesheets/application.css
