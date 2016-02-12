@@ -1,5 +1,0 @@
----
-tasks:
-  - task: rm app/assets/stylesheets/application.css
-  - task: bundle install
-  - task: rake db:drop db:create

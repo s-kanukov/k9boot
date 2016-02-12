@@ -4,7 +4,7 @@ require_relative 'k9boot/rails_app_builder'
 def main
   options = parse_options
   K9Boot::RailsAppBuilder.new(get_app_name(options), options.key?(:admin))
-                          .build
+                         .build
 end
 
 def parse_options
