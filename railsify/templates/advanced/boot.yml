@@ -37,3 +37,41 @@ boot:
                   </script>
                 <% end %>
           where: end
+
+  # Install Devise
+  - tasks:
+    - command: rails generate devise:install
+    - command: rails generate devise User
+    - command: rails generate migration AddRoleToUser role:integer
+
+  - snippets:
+    - file: app/views/layouts/application.html.erb
+      insert:
+        - code: |+
+                <%= render 'shared/alerts' %>
+          where: after
+          selector: |
+                    <body>
+
+    - file: config/environments/development.rb
+      insert:
+        - code: |2+
+
+              config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+          where: before
+          selector: |
+                    end
+
+    - file: app/models/user.rb
+      insert:
+        - code: |2+
+              enum role: [:visitor, :admin]
+
+          where: after
+          selector: |
+                    class User < ActiveRecord::Base
+
+    - file: db/migrate/*_add_role_to_user.rb
+      replace:
+        - code: add_column :users, :role, :integer
+          with: 'add_column :users, :role, :integer, default: 0'
