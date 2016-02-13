@@ -16,8 +16,7 @@ boot:
     - file: config/routes.rb
       replace:
         - code: namespace :frontend do
-          with: |
-                scope module: 'frontend' do
+          with: "scope module: 'frontend' do"
         - code: "get 'home/index'"
           with: "  root 'home#index'"
 
@@ -45,6 +44,12 @@ boot:
     - command: rails generate migration AddRoleToUser role:integer
 
   - snippets:
+    - file: config/routes.rb
+      insert:
+        - code: "\n"
+          where: after
+          selector: devise_for :users
+
     - file: app/views/layouts/application.html.erb
       insert:
         - code: |+
@@ -75,3 +80,27 @@ boot:
       replace:
         - code: add_column :users, :role, :integer
           with: 'add_column :users, :role, :integer, default: 0'
+
+  # Run pending migrations
+  - tasks:
+    - command: rake db:migrate
+
+  # Install Administrate
+  - tasks:
+    # Because of the strange bug it is required to run command below twice
+    - command: DISABLE_SPRING=1 rails generate administrate:install
+    - command: DISABLE_SPRING=1 rails generate administrate:install
+
+  - snippets:
+    - file: app/controllers/admin/application_controller.rb
+      insert:
+        - code: |2+
+                  authenticate_user!
+                  return if current_user.admin?
+                  redirect_to root_path, alert: t('authorization.unauthorized_access')
+          where: after
+          selector: |
+                    # TODO Add authentication logic here.
+
+  - tasks:
+    - command: echo 'All set, rock on!'

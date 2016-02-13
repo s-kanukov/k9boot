@@ -10,8 +10,6 @@ boot:
       replace:
         - code: gem 'coffee-rails'
           with: "# gem 'coffee-rails'"
-        - code: gem 'spring'
-          with: "# gem 'spring'"
 
     - file: config/application.rb
       insert:

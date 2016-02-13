@@ -26,3 +26,6 @@ boot:
                   </script>
                 <% end %>
           where: end
+
+  - tasks:
+    - command: echo 'All set, rock on!'
