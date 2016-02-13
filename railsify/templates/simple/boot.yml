@@ -1,6 +1,7 @@
 ---
 boot:
   - tasks:
+    - command: bundle install
     - command: rails generate controller Home index
 
   - snippets:
@@ -16,7 +17,7 @@ boot:
 
           where: begin
         - code: |
-        
+
                 <% content_for :footer_scripts do %>
                   <script>
                     !function() {

@@ -1,0 +1,39 @@
+---
+boot:
+  - snippets:
+    - file: Gemfile
+      insert:
+        - code: |
+                gem 'devise'
+                gem 'administrate'
+          where: end
+
+  - tasks:
+    - command: bundle install
+    - command: rails generate controller Frontend/Home index
+
+  - snippets:
+    - file: config/routes.rb
+      replace:
+        - code: namespace :frontend do
+          with: |
+                scope module: 'frontend' do
+        - code: "get 'home/index'"
+          with: "  root 'home#index'"
+
+    - file: app/views/frontend/home/index.html.erb
+      insert:
+        - code: |+
+                <% provide(:title, 'Index page') %>
+
+          where: begin
+        - code: |
+
+                <% content_for :footer_scripts do %>
+                  <script>
+                    !function() {
+                      console.log('Hello from Frontend::Home#index');
+                    }();
+                  </script>
+                <% end %>
+          where: end

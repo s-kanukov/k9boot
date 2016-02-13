@@ -91,28 +91,31 @@ module Railsify
     end
 
     def process_insert_snippet(snippet)
+      file_path = get_matching_path snippet['file']
       snippet['insert'].each do |insert|
         case insert['where']
         when 'begin'
-          prepend_to_file(snippet['file'], insert['code'])
+          prepend_to_file(file_path, insert['code'])
         when 'end'
-          append_to_file(snippet['file'], insert['code'])
+          append_to_file(file_path, insert['code'])
         else
-          insert_into_file(snippet['file'], insert['code'],
+          insert_into_file(file_path, insert['code'],
                            insert['where'].to_sym => insert['selector'])
         end
       end
     end
 
     def process_replace_snippet(snippet)
+      file_path = get_matching_path snippet['file']
       snippet['replace'].each do |replace|
-        replace_in_file(snippet['file'], replace['code'], replace['with'])
+        replace_in_file(file_path, replace['code'], replace['with'])
       end
     end
 
     def process_delete_snippet(snippet)
+      file_path = get_matching_path snippet['file']
       snippet['delete'].each do |delete|
-        delete_in_file(snippet['file'], delete['code'])
+        delete_in_file(file_path, delete['code'])
       end
     end
 
