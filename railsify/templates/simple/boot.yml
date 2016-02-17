@@ -2,6 +2,7 @@
 boot:
   - tasks:
     - command: bundle install
+    - command: bundle exec rake db:drop db:create
     - command: rails generate controller Home index
 
   - snippets:

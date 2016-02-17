@@ -51,4 +51,3 @@ boot:
 
   - tasks:
     - command: rm app/assets/stylesheets/application.css
-    - command: rake db:drop db:create

@@ -10,6 +10,7 @@ boot:
 
   - tasks:
     - command: bundle install
+    - command: bundle exec rake db:drop db:create
     - command: rails generate controller Frontend/Home index
 
   - snippets:
@@ -83,7 +84,7 @@ boot:
 
   # Run pending migrations
   - tasks:
-    - command: rake db:migrate
+    - command: bundle exec rake db:migrate
 
   # Install Administrate
   - tasks:
