@@ -27,6 +27,7 @@ boot:
                 //= require_tree .
       insert:
         - code: |
+
                 //= require common
           where: end
       replace:
@@ -38,6 +39,13 @@ boot:
     # Some layout defaults
     - file: app/views/layouts/application.html.erb
       insert:
+        - code: |
+                <!--[if lt IE 10]>
+                  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+                <![endif]-->
+          where: after
+          selector: |
+                    <body>
         - code: |
                 <%= yield :footer_scripts %>
           where: before
