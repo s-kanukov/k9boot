@@ -67,7 +67,7 @@ boot:
     - file: app/models/user.rb
       insert:
         - code: |2+
-              enum role: [:visitor, :admin]
+              enum role: [:user, :admin]
 
           where: after
           selector: |
