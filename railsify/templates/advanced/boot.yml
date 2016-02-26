@@ -30,11 +30,7 @@ boot:
         - code: |
 
                 <% content_for :footer_scripts do %>
-                  <script>
-                    !function() {
-                      console.log('Hello from Frontend::Home#index');
-                    }();
-                  </script>
+                  <%#= javascript_include_tag 'frontend/home', 'data-turbolinks-track' => false %>
                 <% end %>
           where: end
 
@@ -54,7 +50,7 @@ boot:
     - file: app/views/layouts/application.html.erb
       insert:
         - code: |+
-                <%= render 'shared/alerts' %>
+                <%= render 'shared/flashes' %>
           where: after
           selector: |
                     <body>

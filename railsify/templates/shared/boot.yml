@@ -4,7 +4,8 @@ boot:
     - file: Gemfile
       insert:
         - code: |
-                gem 'bourbon'
+                gem 'autoprefixer-rails'
+                gem 'bootstrap', '~> 4.0.0.alpha3'
                 gem 'puma'
           where: end
 
@@ -24,6 +25,7 @@ boot:
                 //= require_tree .
       insert:
         - code: |
+                //= require bootstrap_custom
 
                 //= require common
           where: end
@@ -36,6 +38,13 @@ boot:
     # Some layout defaults
     - file: app/views/layouts/application.html.erb
       insert:
+        - code: |2+
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+              <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+          where: after
+          selector: <head>
         - code: |
                 <!--[if lt IE 10]>
                   <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

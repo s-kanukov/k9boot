@@ -20,11 +20,7 @@ boot:
         - code: |
 
                 <% content_for :footer_scripts do %>
-                  <script>
-                    !function() {
-                      console.log('Hello from Home#index');
-                    }();
-                  </script>
+                  <%#= javascript_include_tag 'home', 'data-turbolinks-track' => false %>
                 <% end %>
           where: end
 
