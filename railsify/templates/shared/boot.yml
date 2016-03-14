@@ -8,6 +8,9 @@ boot:
                 gem 'foundation-rails'
                 gem 'puma'
           where: end
+      replace:
+        - code: gem 'coffee-rails'
+          with: "# gem 'coffee-rails'"
 
     - file: config/application.rb
       insert:
