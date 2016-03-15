@@ -5,7 +5,7 @@ boot:
       insert:
         - code: |
                 gem 'autoprefixer-rails'
-                gem 'foundation-rails'
+                gem 'foundation-rails', '~> 6.2.0'
                 gem 'puma'
           where: end
       replace:
