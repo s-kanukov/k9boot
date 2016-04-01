@@ -4,8 +4,8 @@ boot:
     - file: Gemfile
       insert:
         - code: |
-                gem 'devise', '~> 3.5.6'
                 gem 'administrate', '~> 0.1.4'
+                gem 'devise', '~> 3.5.6'
           where: end
 
   - tasks:

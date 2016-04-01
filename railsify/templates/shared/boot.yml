@@ -4,7 +4,7 @@ boot:
     - file: Gemfile
       insert:
         - code: |
-                gem 'autoprefixer-rails'
+                gem 'autoprefixer-rails', '~> 6.3.5'
           where: end
       replace:
         - code: gem 'coffee-rails'
