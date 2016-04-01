@@ -3,6 +3,7 @@ require 'yaml'
 require_relative 'actions'
 
 module Railsify
+  # Rails application bootstrapper
   class AppBootstrapper
     include Railsify::Actions
 

@@ -1,6 +1,7 @@
 require_relative 'app_bootstrapper'
 
 module Railsify
+  # Rails application builder
   class RailsAppBuilder
     DEFAULT_APP_NAME = 'RailsApp'.freeze
 
@@ -22,7 +23,7 @@ module Railsify
 
     def create_app
       puts "Creating #{@app_name}..."
-      system("rails new #{@app_name} --database=postgresql")
+      system("rails new #{@app_name}")
     end
 
     def bootstrap_app
