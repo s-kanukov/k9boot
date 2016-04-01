@@ -5,7 +5,6 @@ boot:
       insert:
         - code: |
                 gem 'autoprefixer-rails'
-                gem 'puma'
           where: end
       replace:
         - code: gem 'coffee-rails'
@@ -22,14 +21,6 @@ boot:
                     class Application < Rails::Application
 
     - file: app/assets/javascripts/application.js
-      delete:
-        - code: |
-                //= require_tree .
-      insert:
-        - code: |
-
-                //= require common
-          where: end
       replace:
         - code: |
                 //= require jquery
@@ -39,20 +30,6 @@ boot:
     # Some layout defaults
     - file: app/views/layouts/application.html.erb
       insert:
-        - code: |2+
-              <meta charset="utf-8">
-              <meta http-equiv="x-ua-compatible" content="ie=edge">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          where: after
-          selector: |
-                    <head>
-        - code: |
-                <!--[if lt IE 9]>
-                  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-                <![endif]-->
-          where: after
-          selector: |
-                    <body>
         - code: |
                 <%= yield :footer_scripts %>
           where: before
@@ -63,6 +40,3 @@ boot:
           with: <html lang="<%= I18n.locale %>">
         - code: </title>
           with: ' | <%= yield :title %></title>'
-
-  - tasks:
-    - command: rm app/assets/stylesheets/application.css
