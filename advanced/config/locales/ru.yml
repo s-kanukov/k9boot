@@ -1,0 +1,8 @@
+# Russian locale
+
+ru:
+  authorization:
+    unauthorized_access: Доступ запрещен
+  pages:
+    index:
+      welcome: Добро пожаловать

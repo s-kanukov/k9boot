@@ -2,10 +2,10 @@
 An easy customizable Rails template to bootstrap your next app.
 
 # Usage example
-To create a simple application template use:
+To create a basic application template use:
 
-    host $ ruby railsify/railsify.rb -n APP_NAME
+    $ rails new APP_NAME -m ~/basic.rb
 
 or create advanced template:
 
-    host $ ruby railsify/railsify.rb -n APP_NAME -a
+    $ rails new APP_NAME -m ~/advanced.rb

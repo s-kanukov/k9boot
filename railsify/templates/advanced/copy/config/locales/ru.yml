@@ -1,9 +1,0 @@
-# Russian locale
-
-ru:
-  time:
-    formats:
-      default: "%d.%m.%Y %H:%M"
-
-  authorization:
-    unauthorized_access: 'Доступ запрещен'
