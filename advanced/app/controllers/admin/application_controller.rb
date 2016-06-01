@@ -1,5 +1,5 @@
 class Admin::ApplicationController < ApplicationController
-  include Administrable
+  include Authenticable
 
   layout 'admin'
 end
