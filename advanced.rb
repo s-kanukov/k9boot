@@ -77,7 +77,7 @@ insert_into_file migration_file, ', default: 0',
 # Add admin controller and corresponding view
 generate :controller, 'Admin/Pages', 'index'
 # Protect admin area from unauthorized access
-copy_file 'app/controllers/concerns/administrable.rb'
+copy_file 'app/controllers/concerns/authenticable.rb'
 copy_file 'app/controllers/admin/application_controller.rb'
 gsub_file 'app/controllers/admin/pages_controller.rb', 'ApplicationController',
           'Admin::ApplicationController'
