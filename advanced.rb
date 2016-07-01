@@ -12,7 +12,7 @@ end
 # Add gems and comment unnecessary ones
 gem 'autoprefixer-rails', '~> 6.3'
 gem 'devise', '~> 4.1'
-gem 'devise-i18n', '~> 1.0'
+gem 'devise-i18n', '~> 1.1'
 gem 'rails-i18n', '~> 5.0.0.beta4'
 comment_lines 'Gemfile', 'coffee-rails'
 
@@ -28,6 +28,7 @@ inject_into_class 'config/application.rb', 'Application', <<-CODE
     config.i18n.available_locales = :ru
 
 CODE
+copy_file 'config/locales/en.yml'
 copy_file 'config/locales/ru.yml'
 
 # Add helper to print full page title
@@ -37,10 +38,10 @@ insert_into_file 'app/helpers/application_helper.rb',
   # Returns the full title on a per-page basis
   def full_title(page_title)
     base_title = 'RailsApp'
-    if page_title.empty?
+    if page_title.blank?
       base_title
     else
-      "#{base_title} | #{page_title}"
+      "#{page_title} | #{base_title}"
     end
   end
   CODE
@@ -51,9 +52,9 @@ gsub_file 'app/views/layouts/application.html.erb', '<html>',
           '<html lang="<%= I18n.locale %>">'
 gsub_file 'app/views/layouts/application.html.erb', %r{<title>.*</title>},
           '<title><%= full_title yield(:title) %></title>'
-copy_file 'app/views/shared/_flashes.html.erb'
+copy_file 'app/views/shared/_flash.html.erb'
 insert_into_file 'app/views/layouts/application.html.erb',
-                 "    <%= render 'shared/flashes' %>\n", after: "<body>\n"
+                 "    <%= render 'shared/flash' %>\n", after: "<body>\n"
 
 # Devise required config
 insert_into_file 'config/environments/development.rb', before: "\nend" do
@@ -70,7 +71,8 @@ generate 'devise', 'User'
 inject_into_class 'app/models/user.rb', 'User', 'enum role: [:user, :admin]'
 generate :migration, 'AddRoleToUser', 'role:integer'
 migration_file = Railsify::Actions.get_matching_path(
-  'db/migrate/*_add_role_to_user.rb')
+  'db/migrate/*_add_role_to_user.rb'
+)
 insert_into_file migration_file, ', default: 0',
                  after: ':role, :integer'
 
@@ -84,6 +86,7 @@ gsub_file 'app/controllers/admin/pages_controller.rb', 'ApplicationController',
 
 # Add default controller and corresponding view
 generate :controller, 'Pages', 'index'
-route "root: 'pages#index'"
+route "get 'pages/index'"
+route "root 'pages#index'"
 prepend_to_file 'app/views/pages/index.html.erb',
                 "<% provide :title, t('.welcome') %>\n"

@@ -26,6 +26,7 @@ inject_into_class 'config/application.rb', 'Application', <<-CODE
     config.i18n.available_locales = :ru
 
 CODE
+copy_file 'config/locales/en.yml'
 copy_file 'config/locales/ru.yml'
 
 # Add helper to print full page title
@@ -35,10 +36,10 @@ insert_into_file 'app/helpers/application_helper.rb',
   # Returns the full title on a per-page basis
   def full_title(page_title)
     base_title = 'RailsApp'
-    if page_title.empty?
+    if page_title.blank?
       base_title
     else
-      "#{base_title} | #{page_title}"
+      "#{page_title} | #{base_title}"
     end
   end
   CODE
@@ -52,6 +53,7 @@ gsub_file 'app/views/layouts/application.html.erb', %r{<title>.*</title>},
 
 # Add default controller and corresponding view
 generate :controller, 'Pages', 'index'
-route "root: 'pages#index'"
+route "get 'pages/index'"
+route "root 'pages#index'"
 prepend_to_file 'app/views/pages/index.html.erb',
                 "<% provide :title, t('.welcome') %>\n"
