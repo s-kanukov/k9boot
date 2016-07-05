@@ -11,9 +11,9 @@ end
 
 # Add gems and comment unnecessary ones
 gem 'autoprefixer-rails', '~> 6.3'
-gem 'devise', '~> 4.1'
+gem 'devise', '~> 4.2'
 gem 'devise-i18n', '~> 1.1'
-gem 'rails-i18n', '~> 5.0.0.beta4'
+gem 'rails-i18n', '~> 5.0'
 comment_lines 'Gemfile', 'coffee-rails'
 
 # Use jQuery 2
@@ -68,12 +68,12 @@ end
 # Install Devise
 generate 'devise:install'
 generate 'devise', 'User'
-inject_into_class 'app/models/user.rb', 'User', 'enum role: [:user, :admin]'
+inject_into_class 'app/models/user.rb', 'User', "  enum role: [:admin, :user]\n"
 generate :migration, 'AddRoleToUser', 'role:integer'
 migration_file = Railsify::Actions.get_matching_path(
   'db/migrate/*_add_role_to_user.rb'
 )
-insert_into_file migration_file, ', default: 0',
+insert_into_file migration_file, ', default: 1',
                  after: ':role, :integer'
 
 # Add admin controller and corresponding view
@@ -83,10 +83,11 @@ copy_file 'app/controllers/concerns/authenticable.rb'
 copy_file 'app/controllers/admin/application_controller.rb'
 gsub_file 'app/controllers/admin/pages_controller.rb', 'ApplicationController',
           'Admin::ApplicationController'
+copy_file 'app/views/layouts/admin.html.erb'
 
 # Add default controller and corresponding view
 generate :controller, 'Pages', 'index'
-route "get 'pages/index'"
 route "root 'pages#index'"
+route "get 'pages/index'"
 prepend_to_file 'app/views/pages/index.html.erb',
                 "<% provide :title, t('.welcome') %>\n"

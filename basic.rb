@@ -11,7 +11,7 @@ end
 
 # Add gems and comment unnecessary ones
 gem 'autoprefixer-rails', '~> 6.3'
-gem 'rails-i18n', '~> 5.0.0.beta4'
+gem 'rails-i18n', '~> 5.0'
 comment_lines 'Gemfile', 'coffee-rails'
 
 # Use jQuery 2
@@ -53,7 +53,7 @@ gsub_file 'app/views/layouts/application.html.erb', %r{<title>.*</title>},
 
 # Add default controller and corresponding view
 generate :controller, 'Pages', 'index'
-route "get 'pages/index'"
 route "root 'pages#index'"
+route "get 'pages/index'"
 prepend_to_file 'app/views/pages/index.html.erb',
                 "<% provide :title, t('.welcome') %>\n"
