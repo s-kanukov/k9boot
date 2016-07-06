@@ -76,18 +76,18 @@ migration_file = Railsify::Actions.get_matching_path(
 insert_into_file migration_file, ', default: 1',
                  after: ':role, :integer'
 
-# Add admin controller and corresponding view
-generate :controller, 'Admin/Pages', 'index'
-# Protect admin area from unauthorized access
-copy_file 'app/controllers/concerns/authenticable.rb'
-copy_file 'app/controllers/admin/application_controller.rb'
-gsub_file 'app/controllers/admin/pages_controller.rb', 'ApplicationController',
-          'Admin::ApplicationController'
-copy_file 'app/views/layouts/admin.html.erb'
-
 # Add default controller and corresponding view
 generate :controller, 'Pages', 'index'
 route "root 'pages#index'"
 route "get 'pages/index'"
 prepend_to_file 'app/views/pages/index.html.erb',
                 "<% provide :title, t('.welcome') %>\n"
+
+# Add admin controller and corresponding view
+generate :controller, 'Admin/Home', 'index'
+# Protect admin area from unauthorized access
+copy_file 'app/controllers/concerns/authorizable.rb'
+copy_file 'app/controllers/admin/application_controller.rb'
+gsub_file 'app/controllers/admin/home_controller.rb', 'ApplicationController',
+          'Admin::ApplicationController'
+copy_file 'app/views/layouts/admin.html.erb'
