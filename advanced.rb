@@ -10,14 +10,14 @@ def source_paths
 end
 
 # Add gems and comment unnecessary ones
-gem 'autoprefixer-rails', '~> 6.3'
+gem 'autoprefixer-rails', '~> 6.6'
 gem 'devise', '~> 4.2'
 gem 'devise-i18n', '~> 1.1'
 gem 'rails-i18n', '~> 5.0'
 comment_lines 'Gemfile', 'coffee-rails'
 
-# Use jQuery 2
-gsub_file 'app/assets/javascripts/application.js', "jquery\n", "jquery2\n"
+# Use jQuery 3
+gsub_file 'app/assets/javascripts/application.js', "jquery\n", "jquery3\n"
 
 # Set time zone and locale
 inject_into_class 'config/application.rb', 'Application', <<-CODE
