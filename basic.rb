@@ -12,6 +12,7 @@ end
 # Add gems and comment unnecessary ones
 gem 'autoprefixer-rails', '~> 6.6'
 gem 'rails-i18n', '~> 5.0'
+gem 'sassc-rails', '~> 1.3'
 comment_lines 'Gemfile', 'coffee-rails'
 
 # Use jQuery 3
